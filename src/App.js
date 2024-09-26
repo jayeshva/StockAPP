@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import StocksProvider from './components/StocksProvider';
+import { ReactQueryStockList } from './components/ReactQueryStockList';
+import { ReactQueryStockPrice } from './components/ReactQueryStockPrice';
+import NotFound from './components/NotFound';
 
 function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: 1 } },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <StocksProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<ReactQueryStockList />} />
+            <Route path="/stock/:symbol" element={<ReactQueryStockPrice />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </StocksProvider>
+    </QueryClientProvider>
   );
 }
 
