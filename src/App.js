@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import StocksProvider from './components/StocksProvider';
+import StocksProvider from './hooks/StocksProvider';
 import { ReactQueryStockList } from './components/ReactQueryStockList';
 import { ReactQueryStockPrice } from './components/ReactQueryStockPrice';
 import NotFound from './components/NotFound';

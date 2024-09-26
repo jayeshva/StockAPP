@@ -34,6 +34,7 @@ export const useGetStocks = () => {
           console.log({ err });
           throw new Error(err.response.data);
         }
-      }
+      },
+      queryKey:["stockList"]      
     });
 };
