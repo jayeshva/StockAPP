@@ -14,8 +14,6 @@ const fetchStocks = async () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const Ddata = await data;
-      console.log("Ddata")
       return data;
     } catch (err) {
       return err.response.data;

@@ -3,7 +3,7 @@ import { useQuery,useCallback } from 'react-query';
 
 const fetchStockPrice = async (symbol) => {
     console.log(symbol)
-  const apiKey = "b0d2cbff6amshb5bb2776b2d2a3bp1375a0jsn40d2ae345c08";
+  const apiKey = "765bb5eae2msh90cd10ec77d5d8ep1c4907jsnb74c817de18b";
   try {
     const response = await fetch(
       `https://real-time-finance-data.p.rapidapi.com/stock-time-series?symbol=${symbol}&period=1D&language=en`,

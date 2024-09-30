@@ -4,7 +4,7 @@ import SelectStocks from "./SelectStocks";
 
 export const ReactQueryStockPrice = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // if(!location.state?.stock){
   //  return navigate('/');
   // }

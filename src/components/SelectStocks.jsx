@@ -6,8 +6,15 @@ import { useNavigate } from "react-router-dom";
 
 function SelectStocks({ selectedStock, data }) {
   const navigate = useNavigate();
-  const [stockPrice, setStockPrice] = useState(true);
-
+  if (!data.price || !data.time_series) {
+    return (
+      <div>
+        <p className="text-2xl font-bold text-gray-900">
+          oops! No Data Available for {selectedStock.name}
+        </p>
+      </div>
+    );
+  }
   const createChartData = (timeSeries) => {
     const labels = Object.keys(timeSeries);
     const prices = labels.map((key) => timeSeries[key].price);
@@ -37,33 +44,33 @@ function SelectStocks({ selectedStock, data }) {
       <div className="grid grid-cols-2 gap-2 mb-2">
         <p className="text-lg">
           <span className="font-semibold text-gray-800">Symbol:</span>{" "}
-          {selectedStock.symbol}
+          {selectedStock?.symbol}
         </p>
         <p className="text-lg">
           <span className="font-semibold text-gray-800">Exchange:</span>{" "}
-          {selectedStock.exchange}
+          {selectedStock?.exchange}
         </p>
         <p className="text-lg">
           <span className="font-semibold text-gray-800">MIC Code:</span>{" "}
-          {selectedStock.mic_code}
+          {selectedStock?.mic_code}
         </p>
         <p className="text-lg">
           <span className="font-semibold text-gray-800">Currency:</span>{" "}
-          {selectedStock.currency}
+          {selectedStock?.currency}
         </p>
         <p className="text-lg col-span-2">
           <span className="font-semibold text-gray-800">Type:</span>{" "}
-          {selectedStock.type}
+          {selectedStock?.type}
         </p>
       </div>
 
       <div className="mt-4">
-        {stockPrice ? (
+        {data.price ? (
           <p className="text-2xl font-bold text-gray-900">
             Current Price: <span className="text-green-500">₹{data.price}</span>
           </p>
         ) : (
-          <p className="text-lg text-gray-700">Loading price...</p>
+          <p className="text-2xl font-bold text-gray-900">Loading...</p>
         )}
       </div>
 
@@ -73,7 +80,7 @@ function SelectStocks({ selectedStock, data }) {
             Stock Price Chart
           </h4>
           <Line
-            data={createChartData(data.time_series)}
+            data={createChartData(data?.time_series)}
             width={1000}
             height={450}
           />
